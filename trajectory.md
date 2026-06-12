@@ -24,7 +24,7 @@
 | データ保存 | **ローカルファースト**（IndexedDB / Dexie） |
 | 認証・クラウド | MVPでは不要。フェーズ2で Supabase を検討 |
 | 言語 | TypeScript のみ（Go/PHP/Python は使わない） |
-| インフラ | Docker/Nix 不要。Node.js + Vite のみ |
+| 開発環境 | **Dev Container**（Node 22 固定）+ `.nvmrc`。本番デプロイは Cloudflare Pages |
 | コスト | 無料・クレカ不要を優先 |
 | 公開設定 | MVPは非公開（端末内のみ）。公開/非公開切替はフェーズ2 |
 | UI | シンプル・研究者っぽい・機能重視 |
@@ -43,6 +43,7 @@
 | iNaturalist API | 種名検索（キー不要・CORS対応） |
 | Wikipedia REST API | 種の詳細（キー不要） |
 | vite-plugin-pwa | スマホホーム画面追加・オフライン |
+| Dev Container | OS/Node 版差を吸収。Windows パス問題を回避 |
 
 ### 不採用にした選択肢
 
@@ -52,6 +53,7 @@
 | Wails / Electron | スマホ移行で作り直し |
 | Cloudflare D1 (MVP) | 認証・画像保存を自前実装が必要 |
 | Supabase (MVP) | 学習量増。フェーズ2で導入 |
+| Nix / devenv | 学習コスト大。Dev Container で十分 |
 
 ---
 
@@ -63,6 +65,7 @@
 | 2026-06-12 | Leaflet + OSM | キー不要・無料 |
 | 2026-06-12 | trajectory.md をルートに配置 | どのAIでも文脈復元可能にする |
 | 2026-06-12 | MVP 実装完了 | 全画面・DB・API・PWA ビルド成功 |
+| 2026-06-12 | Dev Container 採用 | 開発環境統一。Node 22 + postCreate npm install |
 
 ---
 
@@ -77,6 +80,7 @@
 - [x] iNaturalist + Wikipedia 連携
 - [x] 全フィールド（天気・気温・個体数・季節自動判定等）
 - [x] PWA + ビルド成功（Cloudflare Pages デプロイ準備完了）
+- [x] Dev Container（`.devcontainer/devcontainer.json` + `.nvmrc`）
 
 ---
 

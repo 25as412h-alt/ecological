@@ -14,17 +14,42 @@
 
 ## 必要環境
 
-- Node.js 20+ (LTS 推奨)
-- npm 10+
+- **推奨**: Docker Desktop + Dev Container（環境を統一）
+- **または**: Node.js 22 LTS + npm 10+（[.nvmrc](./.nvmrc) 参照）
 
-## セットアップ
+## セットアップ（Dev Container — 推奨）
+
+Python の `venv` に相当する形で、Docker 内に開発環境を固定します。PC が変わっても同じ Node.js 版で動きます。
+
+### 1. Docker Desktop の確認
+
+```bash
+docker --version
+```
+
+未インストールの場合は [Docker Desktop for Windows](https://www.docker.com/products/docker-desktop/) をインストールし、WSL 2 バックエンドを有効にしてください。
+
+### 2. コンテナで開発開始
+
+1. Cursor でこのプロジェクトを開く
+2. コマンドパレット（`Ctrl+Shift+P`）→ **「Dev Containers: Reopen in Container」**
+3. 初回はイメージ取得 + `npm install` が自動実行されます（数分）
+4. コンテナ内ターミナルで:
+
+```bash
+npm run dev
+```
+
+ブラウザで http://localhost:5173 を開きます。
+
+## セットアップ（ローカル — Docker なし）
+
+Node.js 22 を [.nvmrc](./.nvmrc) に合わせてインストールしてください。
 
 ```bash
 npm install
 npm run dev
 ```
-
-ブラウザで http://localhost:5173 を開きます。
 
 ## ビルド
 
