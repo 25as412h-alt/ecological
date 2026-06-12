@@ -1,0 +1,11 @@
+{
+  // Cloudflare Workers 静的アセット配信用設定
+  "name": "ecological",
+  "compatibility_date": "2026-06-12",
+  "assets": {
+    // Vite のビルド出力先
+    "directory": "./dist",
+    // react-router-dom の直リンク・リロード時に index.html へフォールバックする
+    "not_found_handling": "single-page-application"
+  }
+}
