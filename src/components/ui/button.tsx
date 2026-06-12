@@ -1,0 +1,40 @@
+import { cn } from '@/lib/utils'
+import { type ButtonHTMLAttributes, forwardRef } from 'react'
+
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  variant?: 'default' | 'secondary' | 'outline' | 'destructive' | 'ghost'
+  size?: 'default' | 'sm' | 'lg' | 'icon'
+}
+
+const variant_classes = {
+  default: 'bg-primary text-primary-foreground hover:bg-primary/90',
+  secondary: 'bg-secondary text-primary hover:bg-secondary/80',
+  outline: 'border border-border bg-white hover:bg-muted',
+  destructive: 'bg-destructive text-white hover:bg-destructive/90',
+  ghost: 'hover:bg-muted',
+}
+
+const size_classes = {
+  default: 'h-10 px-4 py-2',
+  sm: 'h-8 px-3 text-sm',
+  lg: 'h-11 px-6',
+  icon: 'h-10 w-10',
+}
+
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ className, variant = 'default', size = 'default', ...props }, ref) => (
+    <button
+      ref={ref}
+      className={cn(
+        'inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors',
+        'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent',
+        'disabled:pointer-events-none disabled:opacity-50',
+        variant_classes[variant],
+        size_classes[size],
+        className,
+      )}
+      {...props}
+    />
+  ),
+)
+Button.displayName = 'Button'

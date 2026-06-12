@@ -1,0 +1,45 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #1e3a2f;
+  --color-primary-foreground: #f8faf9;
+  --color-secondary: #e8f0ec;
+  --color-muted: #f1f5f3;
+  --color-muted-foreground: #5a6b63;
+  --color-border: #d1ddd7;
+  --color-accent: #2d6a4f;
+  --color-destructive: #b91c1c;
+  --font-sans: "Segoe UI", "Hiragino Sans", "Noto Sans JP", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: #f8faf9;
+  color: #1a2e24;
+}
+
+/* Leaflet z-index調整 */
+.leaflet-container {
+  font-family: var(--font-sans);
+  z-index: 0;
+}
+
+.leaflet-pane {
+  z-index: 400;
+}
+
+.leaflet-top,
+.leaflet-bottom {
+  z-index: 1000;
+}
