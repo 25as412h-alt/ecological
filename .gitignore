@@ -2,32 +2,61 @@
 logs
 *.log
 npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
 
 # Dependencies
-node_modules
+node_modules/
 
-# Build
-dist
-dist-ssr
-*.local
+# Build outputs
+dist/
+dist-ssr/
+dev-dist/
+build/
 
-# Editor
+# Vite
+.vite/
+
+# TypeScript
+*.tsbuildinfo
+
+# Environment variables（APIキー等を誤ってコミットしないため）
+.env
+.env.*
+!.env.example
+
+# Test / coverage
+coverage/
+
+# ESLint cache
+.eslintcache
+
+# Editor / IDE
 .vscode/*
 !.vscode/extensions.json
-.idea
+!.vscode/settings.json
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
 .DS_Store
+Thumbs.db
+Desktop.ini
+ehthumbs.db
+
+# Windows
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
 
-# PWA
-dev-dist
+# PWA（vite-plugin-pwa の開発用出力）
+sw.js.map
+workbox-*.js.map
 
-# TypeScript
-*.tsbuildinfo
-
-# Env
-.env
-.env.*
+# Optional: ローカル専用メモ（必要ならコメント解除）
+# notes.local.md
