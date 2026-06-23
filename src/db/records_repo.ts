@@ -38,6 +38,25 @@ export async function get_all_records(): Promise<RecordRow[]> {
   }
 }
 
+export async function get_photo_counts(record_ids: string[]): Promise<Map<string, number>> {
+  try {
+    const counts = new Map<string, number>()
+    for (const id of record_ids) {
+      counts.set(id, 0)
+    }
+    if (record_ids.length === 0) return counts
+
+    const photos = await db.photos.where('record_id').anyOf(record_ids).toArray()
+    for (const photo of photos) {
+      counts.set(photo.record_id, (counts.get(photo.record_id) ?? 0) + 1)
+    }
+    return counts
+  } catch (error) {
+    log_error('get_photo_counts', { record_id_count: record_ids.length }, error)
+    throw error
+  }
+}
+
 export async function get_record_with_photos(id: string): Promise<RecordWithPhotos | undefined> {
   try {
     const record = await db.records.get(id)

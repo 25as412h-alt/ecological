@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useNavigate, useParams, Link } from 'react-router-dom'
 import { toast } from 'sonner'
-import { Pencil, Trash2, ExternalLink } from 'lucide-react'
+import { Pencil, Trash2, ExternalLink, Download } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle, Badge } from '@/components/ui/card'
 import { MapView } from '@/components/map/MapView'
@@ -10,6 +10,7 @@ import { fetch_wikipedia_summary, type WikiSummary } from '@/api/wikipedia'
 import { blob_to_url } from '@/lib/image_utils'
 import { format_datetime } from '@/lib/utils'
 import { log_error } from '@/lib/logger'
+import { use_csv_export } from '@/hooks/useCsvExport'
 import type { RecordWithPhotos } from '@/db/schema'
 
 const TAXON_LABELS: Record<string, string> = {
@@ -24,6 +25,7 @@ export function RecordDetailPage() {
   const [record, set_record] = useState<RecordWithPhotos | null>(null)
   const [wiki, set_wiki] = useState<WikiSummary | null>(null)
   const [is_loading, set_is_loading] = useState(true)
+  const { export_records, is_exporting } = use_csv_export()
 
   useEffect(() => {
     if (!id) return
@@ -79,6 +81,19 @@ export function RecordDetailPage() {
           )}
         </div>
         <div className="flex gap-2">
+          <Button
+            variant="outline"
+            size="icon"
+            disabled={is_exporting}
+            title="CSV出力"
+            onClick={() => {
+              if (!record) return
+              const photo_counts = new Map([[record.id, record.photos.length]])
+              void export_records([record], photo_counts)
+            }}
+          >
+            <Download size={16} />
+          </Button>
           <Link to={`/records/${id}/edit`}>
             <Button variant="outline" size="icon">
               <Pencil size={16} />

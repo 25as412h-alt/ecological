@@ -1,7 +1,9 @@
 import { Link } from 'react-router-dom'
-import { ChevronRight, MapPin } from 'lucide-react'
+import { ChevronRight, Download, MapPin } from 'lucide-react'
 import { Card, CardContent, Badge } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
 import { use_records } from '@/hooks/useRecords'
+import { use_csv_export } from '@/hooks/useCsvExport'
 
 const TAXON_LABELS: Record<string, string> = {
   plant: '植物',
@@ -11,6 +13,7 @@ const TAXON_LABELS: Record<string, string> = {
 
 export function RecordListPage() {
   const { records, is_loading } = use_records()
+  const { export_records, is_exporting } = use_csv_export()
 
   if (is_loading) {
     return <div className="p-4 text-muted-foreground">読み込み中...</div>
@@ -33,7 +36,18 @@ export function RecordListPage() {
 
   return (
     <div className="space-y-2 p-4">
-      <p className="text-sm text-muted-foreground">{records.length} 件の記録</p>
+      <div className="flex items-center justify-between">
+        <p className="text-sm text-muted-foreground">{records.length} 件の記録</p>
+        <Button
+          variant="outline"
+          size="sm"
+          disabled={is_exporting}
+          onClick={() => void export_records(records)}
+        >
+          <Download size={16} />
+          {is_exporting ? '出力中...' : 'CSV出力'}
+        </Button>
+      </div>
       {records.map((record) => (
         <Link key={record.id} to={`/records/${record.id}`}>
           <Card className="transition-colors hover:bg-muted/50">
